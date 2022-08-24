@@ -29,7 +29,6 @@ const buildDateRange = () => {
     const currentYear = new Date().getFullYear();
     const yearRange = currentYear - firstYear;
     const yearArray = Array(yearRange).fill(0).map((_, i) => i + firstYear);
-
     const step = 10
     let start = 0;
     let stop = yearArray.length;
@@ -38,7 +37,9 @@ const buildDateRange = () => {
     let yearObj = {};
     for (let end=10; goOn; end+=10) {
         if (end < stop) {
+            console.log('start' + start + ' and end = ' + end)
             let segment = yearArray.slice(start, end);
+            console.log('Segment: ' + segment)
             start += 10;
             let key = `${segment[0]} - ${segment[step - 1]}`;
             yearObj[key] = segment;
@@ -49,12 +50,27 @@ const buildDateRange = () => {
             let segment = yearArray.slice(start);
             let key = `${segment[0]} - ${segment[difference - 1]}`;
             yearObj[key] = segment;
+
+            // Add current year as well but at the end
+            yearObj[currentYear] = [currentYear];
             goOn = false;
         }
     }
+
+// Sort yearObj before returning it
 return yearObj;
 }
 
 const addDatesFilter = () => {
+    const yearObjs = buildDateRange();
 
+    // Loop over the returned range
+    for (const yearKey in yearObjs) {
+        const yearOption = document.createElement('option');
+        yearOption.value = yearKey;
+        yearOption.text = yearKey;
+        filterDateCls.appendChild(yearOption);
+    }
 }
+
+addDatesFilter();
