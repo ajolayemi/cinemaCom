@@ -7,7 +7,8 @@ const genresList = ['Adventure', 'Action', 'Animation', 'Comedy',
 'Crime', 'Thriller', 'Horror', 'Animation', 'Science Fiction'];
 
 // Parts of the webpage to be modified dynamically
-const filterGenreCls = document.querySelector('select.genre');
+//const filterGenreCls = document.querySelector('.movies .filter-bar .filter-dropdowns .genre');
+const filterGenreCls = document.querySelector('.movies .genre');
 
 // Gets list of genres from TMDB's site
 const getGenres = async () => {
@@ -48,14 +49,14 @@ const getGenresId = async () => {
 const addGenres = () => {
 
     // An obj where the keys are genre's id and the values are their genre's string value
-    const genresObj = getGenresId();
-    console.log(filterGenreCls.childNodes)
+   getGenresId()
     .then((resolved) => {
         const genresResolvedArray = Object.entries(resolved);
         genresResolvedArray.forEach((entry) => {
             const optionEl = document.createElement('option');
             optionEl.value = entry[1].toLowerCase();
-            filterGenreCls.appendChild(optionEl);
+            optionEl.innerHTML = entry[1];
+            filterGenreCls.appendChild(optionEl)
             
         })
     })
