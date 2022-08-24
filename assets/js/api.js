@@ -6,6 +6,9 @@ const tmdbBaseUrl = "https://api.themoviedb.org/3";
 const genresList = ['Adventure', 'Action', 'Animation', 'Comedy', 
 'Crime', 'Thriller', 'Horror', 'Animation', 'Science Fiction'];
 
+// Parts of the webpage to be modified dynamically
+const filterGenreCls = document.querySelector('select.genre');
+
 // Gets list of genres from TMDB's site
 const getGenres = async () => {
     const genreRequestEndPoint = "/genre/movie/list";
@@ -37,8 +40,26 @@ const getGenresId = async () => {
         }) 
         return toReturn;
     } catch (error) {
-        console.log('Error')
+        return error;
     }
 }
 
-getGenresId()
+// Dynamically adds genres to webpage
+const addGenres = () => {
+
+    // An obj where the keys are genre's id and the values are their genre's string value
+    const genresObj = getGenresId();
+    console.log(filterGenreCls.childNodes)
+    .then((resolved) => {
+        const genresResolvedArray = Object.entries(resolved);
+        genresResolvedArray.forEach((entry) => {
+            const optionEl = document.createElement('option');
+            optionEl.value = entry[1].toLowerCase();
+            filterGenreCls.appendChild(optionEl);
+            
+        })
+    })
+    .then((error) => console.log(error))
+}
+
+addGenres();
