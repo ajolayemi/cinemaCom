@@ -19,8 +19,26 @@ const getGenres = async () => {
         return genres;
       }
     } catch (error) {
-      return null;
+      throw new Error(error);
     }
   };
 
- getGenres();
+// Returns an object where the keys are genre's ID and values are their ID's
+const getGenresId = async () => {
+    try {
+        const genresFromTmdb = await getGenres();
+        const toReturn = {};
+        // Loop over the returned array
+        genresList.forEach((genre) => {
+            const genreObj = genresFromTmdb.filter(obj => obj.name == genre);
+            const genreId = genreObj.length > 0 ? genreObj[0].id : null;
+
+            toReturn[genreId] = genre
+        }) 
+        return toReturn;
+    } catch (error) {
+        console.log('Error')
+    }
+}
+
+getGenresId()
