@@ -3,6 +3,7 @@ const firstYear = 1980;
 
 // selected parts of the webpage
 const filterGenreCls = document.querySelector('.movies .genre');
+const filterDateCls = document.querySelector('.movies .year');
 
 // Returns the current genre selection from the dropdown menu
 const getSelectedGenre = () => {
@@ -52,4 +53,8 @@ const buildDateRange = () => {
         }
     }
 return yearObj;
+}
+
+const addDatesFilter = () => {
+
 }
