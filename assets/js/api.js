@@ -16,11 +16,10 @@ const getGenres = async () => {
       if (response.ok) {
         const jsonResponse = await response.json();
         const genres = jsonResponse.genres;
-        console.log(genres)
         return genres;
       }
     } catch (error) {
-      console.log(`This is the error ${error}`);
+      return null;
     }
   };
 
