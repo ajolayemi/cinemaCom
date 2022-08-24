@@ -33,4 +33,14 @@
   */
  
  @import url(./reset.css);
- 
+
+
+/*-------------------------------------*\
+  #REPEAT
+\*-------------------------------------*/
+
+/**
+ * reused style
+ */
+ header, nav { background: var(--rich-black-fogra-29);
+}
