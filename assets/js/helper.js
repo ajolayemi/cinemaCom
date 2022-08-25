@@ -85,5 +85,4 @@ const fromSeconds = timeInSeconds => {
     return `${hour}h ${minutes}m`;
 }
 
-console.log(fromSeconds(12))
 addDatesFilter();
