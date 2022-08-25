@@ -42,6 +42,7 @@ const getTrendingMovies = async () => {
 
 
 const getMovieDetails = async movieId => {
+    const picturePathBase = 'https://image.tmdb.org/t/p/w185';
     const detailsEndpoint = '/movie';
     const requestParams = `/${movieId}?api_key=${tmdbKey}`;
     const detailsUrl = `${tmdbBaseUrl}${detailsEndpoint}${requestParams}`;
@@ -55,7 +56,7 @@ const getMovieDetails = async movieId => {
             const movieProductionDate =  detJson.release_date;
             const productionYear = movieProductionDate ? new Date(movieProductionDate).getFullYear() : null;
             const duration = fromSeconds(detJson.runtime);
-            const posterPath = detJson.poster_path;
+            const posterPath = `${picturePathBase}${detJson.poster_path}`;
 
             return {'movieName': movieName, 'genres': movieGenres,
         'year': productionYear, 'duration': duration, 'posterPath': posterPath};
@@ -65,6 +66,5 @@ const getMovieDetails = async movieId => {
         throw new Error(e);
     }
 }
-
 
 getGenres().then(addGenres)
