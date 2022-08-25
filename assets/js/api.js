@@ -21,4 +21,23 @@ const getGenres = async () => {
     }
   };
 
+
+// Gets a list of trending movies and returns the id of a random trending movie
+const getTrendingMovies = async () => {
+    const trendingRequestEndpoint = "/trending/movie/day";
+    const requestParams = `?api_key=${tmdbKey}`;
+    const trendingUrl = `${tmdbBaseUrl}${trendingRequestEndpoint}${requestParams}`
+    try {
+        const response = await fetch(trendingUrl);
+        if (response.ok) {
+            const toJson = await response.json();
+            const trendings = toJson.results;
+            const randomInt = Math.floor(Math.random() * trendings.length);
+            return trendings[randomInt].id;
+        }
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
 getGenres().then(addGenres)
