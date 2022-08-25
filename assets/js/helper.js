@@ -85,4 +85,8 @@ const fromSeconds = timeInSeconds => {
     return `${hour}h ${minutes}m`;
 }
 
+// Updates webpage's banner
+const updateBanner = dataObj => {
+};
+
 addDatesFilter();
