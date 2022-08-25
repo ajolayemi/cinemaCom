@@ -74,6 +74,4 @@ const getMovieDetails = async movieId => {
         throw new Error(e);
     }
 }
-
-// getTrendingMovies().then((res) => getMovieDetails(res).then((e) => console.log(e)))
 getGenres().then(addGenres)
