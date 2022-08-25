@@ -87,6 +87,12 @@ const fromSeconds = timeInSeconds => {
 
 // Updates webpage's banner
 const updateBanner = dataObj => {
+    const bannerCls = document.querySelector('.banner');
+    const bannerImgCls = bannerCls.querySelector('.banner-card');
+    const bannerGenreCls = bannerCls.querySelector('.genre');
+    const bannerYearCls = bannerCls.querySelector('.year');
+    const bannerTitleCls = bannerCls.querySelector('.card-title');
+    const bannerDuration = bannerCls.querySelector('.duration');
 };
 
 addDatesFilter();
