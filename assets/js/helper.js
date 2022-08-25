@@ -77,4 +77,13 @@ const addDatesFilter = () => {
     
 }
 
+// Translates seconds time value to h:m
+const fromSeconds = timeInSeconds => {
+    const hour = Math.floor(timeInSeconds / 60);
+    const minutes = timeInSeconds % 60;
+
+    return `${hour}h ${minutes}m`;
+}
+
+console.log(fromSeconds(12))
 addDatesFilter();
