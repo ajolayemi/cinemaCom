@@ -52,13 +52,21 @@ const getMovieDetails = async movieId => {
         if (response.ok) {
             const detJson = await response.json();
             const movieName = detJson.original_title;
+            let movieGenresStr = '';
             const movieGenres = detJson.genres;
+            movieGenres.forEach((currentGenre) => {
+                if (!(currentGenre === movieGenres[movieGenres.length - 1])) {
+                    movieGenresStr += `${currentGenre.name}/`;
+                } else {
+                    movieGenresStr += `${currentGenre.name}`
+                }
+            })
             const movieProductionDate =  detJson.release_date;
             const productionYear = movieProductionDate ? new Date(movieProductionDate).getFullYear() : null;
             const duration = fromSeconds(detJson.runtime);
             const posterPath = `${picturePathBase}${detJson.poster_path}`;
 
-            return {'movieName': movieName, 'genres': movieGenres,
+            return {'movieName': movieName, 'genres': movieGenresStr,
         'year': productionYear, 'duration': duration, 'posterPath': posterPath};
         }
     } catch (e) {
@@ -67,4 +75,5 @@ const getMovieDetails = async movieId => {
     }
 }
 
+// getTrendingMovies().then((res) => getMovieDetails(res).then((e) => console.log(e)))
 getGenres().then(addGenres)
